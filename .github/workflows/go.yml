@@ -9,7 +9,10 @@ on:
 jobs:
 
   build:
-    runs-on: [ubuntu-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
 
@@ -23,3 +26,9 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: grmbpu_${{ matrix.os }}
+        path: .

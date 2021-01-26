@@ -1,0 +1,40 @@
+{
+   "GithubToken":"<place your token here>",
+   "Manifest":{
+      "Server":"https://your-github-enterprise-server.com/",
+      "Owner":"<user or organization>",
+      "Repo":"<repository containing the manifest file>",
+      "Filename":"default.xml"
+   },
+   "ExcludeList":[
+      "repo1",
+      "repo2"
+   ],
+   "Branches":[
+      {
+		 "Name": "main",
+         "AllowForcePushes":false,
+         "AllowDeletions":false,
+         "RequireLinearHistory":false,
+         "EnforceAdmins":false,
+         "RequiredStatusChecks":{
+            "Strict":true,
+            "Contexts":[
+               "myCI"
+            ]
+         },
+         "RequiredPullRequestReviews":{
+            "DismissStaleReviews":true,
+            "RequireCodeOwnerReviews":false,
+            "RequiredApprovingReviewCount":42
+         }
+      },
+      {
+         "Name": "release-02.00",
+           "AllowForcePushes":false,
+           "AllowDeletions":false,
+           "RequireLinearHistory":false,
+           "EnforceAdmins":false
+        }
+   ]
+}
