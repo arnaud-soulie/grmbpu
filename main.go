@@ -6,8 +6,11 @@ import (
 	"fmt"
 
 	"github.com/google/go-github/v33/github"
+	"github.com/integrii/flaggy"
 	"golang.org/x/oauth2"
 )
+
+var sshPort = 80
 
 func checkProjectExcluded(s string, list []string) bool {
 	for _, v := range list {
@@ -19,6 +22,14 @@ func checkProjectExcluded(s string, list []string) bool {
 }
 
 func main() {
+	//Flags
+	flaggy.SetName("GitRepo Manifest Branch Protection Updater")
+	flaggy.SetDescription("Configure Github branch protection process when working on " +
+		"multiple repositories listed inside a GitRepo manifest file.")
+	flaggy.SetVersion("init")
+	flaggy.Int(&sshPort, "p", "sshport", "Port value overload for SSH remotes")
+	flaggy.Parse()
+
 	config := readConfigFile("config.json")
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: config.GithubToken})
