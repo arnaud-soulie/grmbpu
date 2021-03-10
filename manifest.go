@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"strconv"
 	"strings"
 
 	//"strings"
@@ -50,8 +51,8 @@ func getURL(remoteURL string) url.URL {
 			fmt.Println("Remote " + remoteURL + " is an SSH URL")
 			u.Scheme = "http"
 			//Remove port information is any in case of ssh url
-			//assume that http address is available on port 80
-			u.Host = strings.Split(u.Host, ":")[0]
+			//and replace with global sshPort value
+			u.Host = strings.Split(u.Host, ":")[0] + ":" + strconv.Itoa(sshPort)
 		}
 		//Remove leading '/' character
 		u.Path = strings.Replace(u.Path, "/", "", -1)

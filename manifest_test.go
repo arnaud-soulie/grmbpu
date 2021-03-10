@@ -44,7 +44,7 @@ func TestListRemotes(t *testing.T) {
 	remotes := make(map[string](url.URL))
 	wanted := make(map[string](url.URL))
 	user := url.UserPassword("user", "pass")
-	wanted["origin"] = url.URL{Scheme: "http", Host: "domain.com", Path: "owner", User: user}
+	wanted["origin"] = url.URL{Scheme: "http", Host: "domain.com:80", Path: "owner", User: user}
 	wanted["ending"] = url.URL{Scheme: "http", Host: "domain.com:1234", Path: "owner", User: user}
 	remotes = listRemotes(&manifest)
 	if !reflect.DeepEqual(remotes, wanted) {
@@ -55,8 +55,8 @@ func TestListRemotes(t *testing.T) {
 func TestGetURL(t *testing.T) {
 	remote := "ssh://user:password@domain.com:1234/path/"
 	url := getURL(remote)
-	if url.Host != "domain.com" || url.Path != "path" {
-		t.Fatalf(`Domain: '%v' expected: 'domain.com' ; Path: '%v' expected 'path'`, url.Host, url.Path)
+	if url.Host != "domain.com:80" || url.Path != "path" {
+		t.Fatalf(`Domain: '%v' expected: 'domain.com:80' ; Path: '%v' expected 'path'`, url.Host, url.Path)
 	}
 	remote = "http://user:password@domain.com:1234/path/"
 	url = getURL(remote)

@@ -8,6 +8,9 @@ Launch grmbpu executable. A config.json file should be available next to the exe
 
 See the attached example file.
 
+grmbpu -h for help
+grmbpu -p 1234 to specif a default SSH remote port replacement
+
 ## Configuration
 
 Based on the config.json file, fill the different information regarding the Github server, and the branches to configure protection for.
@@ -25,7 +28,7 @@ may be removed from the configuration to disable these checks.
 ## TODO
 
 - [ ] Manage multiple remote servers
-- [ ] Force a specific port for ssh remotes
+- [x] Force a specific port for ssh remotes
 - [ ] Manage multiple remote credentials
 - [ ] Manage included manifest files
 - [ ] Manage CLI arguments
